@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDatabase } from './in-memory-database';
+
 import { NavBarComponent } from './support/nav-bar/nav-bar.component';
 
 @NgModule({
@@ -12,7 +16,8 @@ import { NavBarComponent } from './support/nav-bar/nav-bar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase)
   ],
   providers: [],
   bootstrap: [AppComponent]
