@@ -41,6 +41,16 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     this.setPageTitle();
   }
 
+  submitForm(): void {
+    this.submittingForm = true;
+
+    if (this.currentAction === 'new') {
+      this.createCategory();
+    } else {
+      this.updateCategory();
+    }
+  }
+
   // PRIVATE METHODS
 
 
@@ -87,4 +97,44 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     }
   }
 
+  private createCategory(): void {
+    // @ts-ignore
+    const category: CategoryModel = Object.assign(new CategoryModel(), this.categoryForm.value);
+
+    this.categoryService.create(category)
+      .subscribe(
+        categoryNew => this.actionsForSuccess(categoryNew),
+        error => this.actionsForError(error)
+      );
+  }
+
+  private updateCategory(): void {
+    // @ts-ignore
+    const category: CategoryModel = Object.assign(new CategoryModel(), this.categoryForm.value);
+
+    this.categoryService.update(category)
+      .subscribe(
+        categoryNew => this.actionsForSuccess(categoryNew),
+        error => this.actionsForError(error)
+      );
+  }
+
+  private actionsForSuccess(category: CategoryModel): void {
+    toastr.success('Solicitação processada com sucesso!');
+
+    this.router.navigate([`/categories`]);
+  }
+
+  private actionsForError(error: any): void {
+    toastr.error(`Ocorreu um erro ao processar a sua solicitação!`);
+
+    this.submittingForm = false;
+
+    if (error.status === 422) {
+      this.serverErrorMessages = JSON.parse(error._body).errors;
+      // Erros do lado do servidor
+    } else {
+      this.serverErrorMessages = [`Falha na comunicação com o servidor. Por favor, tente mais tarde`];
+    }
+  }
 }
