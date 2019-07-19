@@ -1,7 +1,7 @@
 <nav class="mb-5">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-    <li class="breadcrumb-item"><a [routerLink]="['/categories']">Categorias</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/categories']">Lançamentos</a></li>
     <li class="breadcrumb-item active">{{pageTitle}}</li>
   </ol>
 </nav>
@@ -13,16 +13,16 @@
     </h1>
   </div>
   <div class="col-md-3">
-    <a class="btn btn-light float-right" [routerLink]="['/categories']"><< Voltar</a>
+    <a class="btn btn-light float-right" [routerLink]="['/entries']"><< Voltar</a>
   </div>
 </div>
 
 
-<form [formGroup]="categoryForm" (submit)="submitForm()">
+<form [formGroup]="entryForm" (submit)="submitForm()">
 
   <div class="card">
     <div class="card-header">
-      Informações sobre a categoria
+      Informações sobre o lançamento
     </div>
     <div class="card-body">
       <div class="form-row">
@@ -31,19 +31,19 @@
           <input type="text" class="form-control" id="name" formControlName="name">
 
           <div class="text-danger"
-               *ngIf="categoryForm.get('name').invalid && categoryForm.get('name').touched"
+               *ngIf="entryForm.get('name').invalid && entryForm.get('name').touched"
           >
-            <div *ngIf="categoryForm.get('name').errors.required">Campo obrigatório</div>
-            <div *ngIf="categoryForm.get('name').errors.minlength">Minímo de 2 caracteres</div>
+            <div *ngIf="entryForm.get('name').errors.required">Campo obrigatório</div>
+            <div *ngIf="entryForm.get('name').errors.minlength">Minímo de 2 caracteres</div>
           </div>
         </div>
         <div class="form-group col-8">
           <label for="description">Descrição</label>
           <input type="text" class="form-control" id="description" formControlName="description">
           <div class="text-danger"
-               *ngIf="categoryForm.get('description').invalid && categoryForm.get('description').touched"
+               *ngIf="entryForm.get('description').invalid && entryForm.get('description').touched"
           >
-            <div *ngIf="categoryForm.get('description').errors.required">Campo obrigatório</div>
+            <div *ngIf="entryForm.get('description').errors.required">Campo obrigatório</div>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
   </div>
 
   <button type="submit" class="btn btn-primary btn-lg float-right mt-3"
-          [disabled]="submittingForm || categoryForm.invalid">
+          [disabled]="submittingForm || entryForm.invalid">
     Salvar
   </button>
 
