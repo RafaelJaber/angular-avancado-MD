@@ -5,16 +5,12 @@
   ]"
 ></app-bread-crumb>
 
-<div class="row mb-4">
-  <div class="col-md-9">
-    <h1 class="h2 border-left pl-2">
-      {{pageTitle}}
-    </h1>
-  </div>
-  <div class="col-md-3">
-    <a class="btn btn-light float-right" [routerLink]="['/categories']"><< Voltar</a>
-  </div>
-</div>
+<app-page-header
+  [page-title]="pageTitle"
+  button-link="/categories"
+  button-class="btn-light"
+  button-text="<< Voltar"
+></app-page-header>
 
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
