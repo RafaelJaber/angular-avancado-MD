@@ -21,6 +21,10 @@ export class EntryModel extends BaseResourceModel {
     revenue: 'Receita'
   };
 
+  static fromJson(jsonData: any): EntryModel {
+    return Object.assign(new EntryModel(), jsonData);
+  }
+
   get paidText(): string {
     return this.paid ? 'Pago' : 'Pendente';
   }

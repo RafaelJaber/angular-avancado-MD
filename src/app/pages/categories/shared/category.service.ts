@@ -12,6 +12,6 @@ export class CategoryService extends BaseResourceService<CategoryModel> {
   constructor(
     protected injector: Injector
   ) {
-    super('api/categories', injector);
+    super('api/categories', injector, CategoryModel.fromJson);
   }
 }
